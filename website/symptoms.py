@@ -8,6 +8,7 @@ from .leki_test.exam import Exam
 from .leki_test.ecg import Ecg
 from .leki_test.temperature import Temperature
 from .leki_test.skin import Skin
+from .leki_test.cisnienie import Cisnienie
 
 drgawki = ['bez drgawek', 'drgawki']
 
@@ -15,11 +16,11 @@ drgawki = ['bez drgawek', 'drgawki']
 def get_symptoms():
     age = Age()
     consciousness = Consciousness()
-    pressure = Pressure()
+    cisnienie = Cisnienie()
     temp = Temperature()
     skin = Skin()
     ecg = Ecg()
-    return f"{age.age}, {consciousness.consciousness}, {choice(drgawki)}, częstość oddechu: {randint(0, 10)}/10 sek, saturacja {randint(50, 100)}%, częstość tętna {ecg.pulse_rate}/10 sek., {pressure.pressure}, {temp.temperature}, {skin.skin}, {ecg.ekg}."
+    return f"{age.age}, {consciousness.consciousness}, {choice(drgawki)}, częstość oddechu: {randint(0, 10)}/10 sek, saturacja {randint(50, 100)}%, częstość tętna {ecg.pulse_rate}/10 sek., {cisnienie.cisnienie}, {temp.temperature}, {skin.skin}, {ecg.ekg}."
 
 
 def get_sample():
