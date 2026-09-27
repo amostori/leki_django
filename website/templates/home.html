@@ -1,1 +1,41 @@
 {% extends "base.html" %}
+
+{% block losowanie %}
+<section class="wrapper style1 align-center">
+    <div class="inner">
+    <h2>Przetestuj aplikację</h2>  
+    <br />  
+        <form id="sampleForm" method="post" action="{% url 'my_ajax_view' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+    
+    <button type="submit">Generuj przypadek testowy</button>
+    <br />
+    <br />
+    <p id="message"> {{ message }}</p>
+</form>
+</div>
+</section>
+<script>
+    document.getElementById('sampleForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const form = event.target;
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.content.status === 'success') {
+                document.getElementById('message').textContent = data.content.message;
+            } else if (data.content.status === 'error') {
+                console.log(data.content.errors);
+            }
+        });
+    });
+</script>
+    
+{% endblock losowanie %}
